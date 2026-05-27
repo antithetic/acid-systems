@@ -4,8 +4,8 @@ import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schema'
 
 export default defineConfig({
-  name: 'default',
-  title: 'Acid System',
+  name: 'acid-systems',
+  title: 'Acid Systems',
 
   projectId: 'nmhp3u9m',
   dataset: 'production',
