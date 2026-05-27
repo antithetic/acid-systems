@@ -12,6 +12,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@acid-systems/unocss": "workspace:*",
     "astro": "^6.3.8"
   }
 }
