@@ -4,7 +4,7 @@
   "exports": {
     ".": "./src/index.ts"
   },
-    "dependencies": {
+  "dependencies": {
     "@sanity/vision": "^5.27.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
