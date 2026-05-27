@@ -7,8 +7,14 @@ export default defineType({
   fields: [
     defineField({
       name: 'title',
-      title: 'Title',
+      title: 'Site Title',
       type: 'string',
+    }),
+    defineField({
+      name: 'description',
+      title: 'Site Description',
+      type: 'string',
+      validation: (Rule) => Rule.max(160),
     }),
   ],
 })
