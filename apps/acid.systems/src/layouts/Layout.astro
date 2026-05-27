@@ -1,3 +1,7 @@
+---
+import {Font} from 'astro:assets'
+---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -5,6 +9,7 @@
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>Acid Systems</title>
+    <Font cssVariable="--font-serif" />
   </head>
   <body>
     <slot />
