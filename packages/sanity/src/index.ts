@@ -20,20 +20,12 @@ export const sharedConfig = {
 
 export const sharedPlugins = {
   plugins: [
-    structureTool({
-      defaultDocumentNode: (S) =>
-        S.document().views([S.view.form(), referencesView(S)]),
-    }),
-    visionTool(),
-    webhooksTrigger(),
     media(),
     references(),
-    tags(),
     singletonTools(),
-    youtubeInput({
-      // @ts-ignore
-      apiKey: process.env.YOUTUBE_API_KEY,
-    }),
+    tags(),
+    visionTool(),
+    webhooksTrigger(),
   ],
 }
 export default defineConfig([
@@ -44,7 +36,13 @@ export default defineConfig([
     icon: Cannabis,
 
     ...sharedConfig,
-    plugins: [...sharedPlugins.plugins],
+    plugins: [
+      ...sharedPlugins.plugins,
+      structureTool({
+        defaultDocumentNode: (S) =>
+          S.document().views([S.view.form(), referencesView(S)]),
+      }),
+    ],
 
     schema: {
       types: [...acidSystemsSchema],
@@ -59,7 +57,14 @@ export default defineConfig([
 
     ...sharedConfig,
 
-    plugins: [...sharedPlugins.plugins],
+    plugins: [
+      ...sharedPlugins.plugins,
+      structureTool({}),
+      youtubeInput({
+        // @ts-ignore
+        apiKey: process.env.YOUTUBE_API_KEY,
+      }),
+    ],
 
     schema: {
       types: [...notesSchema],

@@ -1,1 +1,1 @@
-export const structure = []
+export const acidSystemsStructure = []
