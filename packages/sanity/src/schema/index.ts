@@ -1,9 +1,3 @@
-import {schemaDocuments} from './documents'
-import {schemaObjects} from './objects'
-import {schemaSingletons} from './singletons'
+import {acidSystemsSchemaTypes} from './acid.systems'
 
-export const schemaTypes = [
-  ...schemaDocuments,
-  ...schemaObjects,
-  ...schemaSingletons,
-]
+export const schemaTypes = [...acidSystemsSchemaTypes]
