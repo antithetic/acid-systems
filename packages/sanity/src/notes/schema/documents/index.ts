@@ -1,5 +1,5 @@
 import {signal} from './signal'
 import {fieldNote} from './field-note'
-import {color} from './color'
+import {colorNote} from './color'
 
-export const notesDocuments = [signal, fieldNote, color]
+export const notesDocuments = [signal, fieldNote, colorNote]

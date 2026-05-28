@@ -1,7 +1,9 @@
 import {visionTool} from '@sanity/vision'
 import {Cannabis, BrainCog} from 'lucide-react'
+import {customColorPicker} from 'sanity-plugin-color-input'
 import {defineConfig} from 'sanity'
 import {media} from 'sanity-plugin-media'
+import {ptString} from 'sanity-plugin-pt-string'
 import {references, referencesView} from 'sanity-plugin-references'
 import {singletonTools} from 'sanity-plugin-singleton-management'
 import {structureTool} from 'sanity/structure'
@@ -60,11 +62,12 @@ export default defineConfig([
     plugins: [
       structureTool({}),
       ...sharedPlugins.plugins,
-
       youtubeInput({
         // @ts-ignore
         apiKey: process.env.YOUTUBE_API_KEY,
       }),
+      customColorPicker(),
+      ptString(),
     ],
 
     schema: {
