@@ -1,7 +1,7 @@
 import {defineField, defineType} from 'sanity'
 import {CogIcon} from '@sanity/icons'
 
-export default defineType({
+export const settings = defineType({
   name: 'settings',
   title: 'Site Settings',
   type: 'document',

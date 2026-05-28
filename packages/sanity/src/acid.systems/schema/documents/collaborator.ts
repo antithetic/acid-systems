@@ -1,7 +1,7 @@
 import {defineField, defineType} from 'sanity'
 import {UserIcon} from '@sanity/icons'
 
-export default defineType({
+export const collaborator = defineType({
   name: 'collaborator',
   title: 'Collaborator',
   type: 'document',

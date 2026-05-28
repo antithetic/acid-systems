@@ -1,7 +1,7 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
 import {ImagesIcon} from '@sanity/icons'
 
-export default defineType({
+export const imageGallery = defineType({
   name: 'imageGallery',
   title: 'Image Gallery',
   type: 'object',

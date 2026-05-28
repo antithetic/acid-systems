@@ -1,7 +1,7 @@
 import {defineField, defineType} from 'sanity'
 import {BlockquoteIcon} from '@sanity/icons'
 
-export default defineType({
+export const quoteBlock = defineType({
   name: 'quoteBlock',
   title: 'Quote Block',
   type: 'object',

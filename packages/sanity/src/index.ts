@@ -1,38 +1,82 @@
+import {theme} from 'https://themer.sanity.build/api/hues?default=898586&primary=807986&transparent=888686&positive=43d675;300&caution=fbd024;200&darkest=121111'
+
 import {visionTool} from '@sanity/vision'
-import {Cannabis} from 'lucide-react'
+import {Cannabis, BrainCog} from 'lucide-react'
+import {customColorPicker} from 'sanity-plugin-color-input'
 import {defineConfig} from 'sanity'
 import {media} from 'sanity-plugin-media'
+import {ptString} from 'sanity-plugin-pt-string'
 import {references, referencesView} from 'sanity-plugin-references'
+import {richDate} from '@sanity/rich-date-input'
 import {singletonTools} from 'sanity-plugin-singleton-management'
 import {structureTool} from 'sanity/structure'
 import {tags} from 'sanity-plugin-tags-v4'
+import {youtubeInput} from 'sanity-plugin-youtube-input'
 
 import {webhooksTrigger} from 'sanity-plugin-webhooks-trigger'
 
-import {schemaTypes} from './schema'
+import {acidSystemsSchema} from './acid.systems/schema'
+import {notesSchema} from './notes/schema'
 
-export default defineConfig({
-  name: 'acid-systems',
-  title: 'Acid Systems',
-
+export const sharedConfig = {
+  theme,
   projectId: 'nmhp3u9m',
   dataset: 'production',
-  icon: Cannabis,
+}
 
+export const sharedPlugins = {
   plugins: [
-    structureTool({
-      defaultDocumentNode: (S) =>
-        S.document().views([S.view.form(), referencesView(S)]),
-    }),
     visionTool(),
-    webhooksTrigger(),
     media(),
+    webhooksTrigger(),
     references(),
-    tags(),
+    richDate(),
     singletonTools(),
+    tags(),
   ],
+}
+export default defineConfig([
+  {
+    basePath: '/acid-systems',
+    name: 'acid-systems',
+    title: 'Acid Systems',
+    icon: Cannabis,
 
-  schema: {
-    types: schemaTypes,
+    ...sharedConfig,
+    plugins: [
+      structureTool({
+        defaultDocumentNode: (S) =>
+          S.document().views([S.view.form(), referencesView(S)]),
+      }),
+      ...sharedPlugins.plugins,
+    ],
+
+    schema: {
+      types: [...acidSystemsSchema],
+    },
   },
-})
+
+  {
+    basePath: '/notes',
+    name: 'notes',
+    title: 'Notes',
+    icon: BrainCog,
+
+    ...sharedConfig,
+
+    plugins: [
+      structureTool({}),
+      ...sharedPlugins.plugins,
+      youtubeInput({
+        // @ts-ignore
+        apiKey: process.env.YOUTUBE_API_KEY,
+      }),
+      customColorPicker(),
+      ptString(),
+    ],
+
+    schema: {
+      types: [...notesSchema],
+    },
+  },
+])
