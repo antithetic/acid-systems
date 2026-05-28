@@ -6,10 +6,12 @@ import {references, referencesView} from 'sanity-plugin-references'
 import {singletonTools} from 'sanity-plugin-singleton-management'
 import {structureTool} from 'sanity/structure'
 import {tags} from 'sanity-plugin-tags-v4'
+import {youtubeInput} from 'sanity-plugin-youtube-input'
 
 import {webhooksTrigger} from 'sanity-plugin-webhooks-trigger'
 
-import {acidSystemsSchema, notesSchema} from './schema'
+import {acidSystemsSchema} from './schema'
+import {notesSchema} from './notes/schema'
 
 export const sharedConfig = {
   projectId: 'nmhp3u9m',
@@ -28,6 +30,10 @@ export const sharedPlugins = {
     references(),
     tags(),
     singletonTools(),
+    youtubeInput({
+      // @ts-ignore
+      apiKey: process.env.YOUTUBE_API_KEY,
+    }),
   ],
 }
 export default defineConfig([
@@ -38,7 +44,7 @@ export default defineConfig([
     icon: Cannabis,
 
     ...sharedConfig,
-    ...sharedPlugins,
+    plugins: [...sharedPlugins.plugins],
 
     schema: {
       types: [...acidSystemsSchema],
@@ -52,7 +58,8 @@ export default defineConfig([
     icon: BrainCog,
 
     ...sharedConfig,
-    ...sharedPlugins,
+
+    plugins: [...sharedPlugins.plugins],
 
     schema: {
       types: [...notesSchema],

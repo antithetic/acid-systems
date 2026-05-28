@@ -17,10 +17,12 @@
     "sanity-plugin-singleton-management": "^1.0.7",
     "sanity-plugin-tags-v4": "^1.0.18",
     "sanity-plugin-webhooks-trigger": "^0.8.1",
+    "sanity-plugin-youtube-input": "^0.2.0",
     "styled-components": "^6.1.18"
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^6.0.0",
+    "@types/node": "^25.9.1",
     "@types/react": "^19.2.14",
     "eslint": "^9.28",
     "prettier": "^3.5",
