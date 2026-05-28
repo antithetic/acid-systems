@@ -10,7 +10,7 @@ import {youtubeInput} from 'sanity-plugin-youtube-input'
 
 import {webhooksTrigger} from 'sanity-plugin-webhooks-trigger'
 
-import {acidSystemsSchema} from './schema'
+import {acidSystemsSchema} from './acid.systems/schema'
 import {notesSchema} from './notes/schema'
 
 export const sharedConfig = {
