@@ -1,46 +1,41 @@
-# Astro Starter Kit: Basics
+# `acid.systems`
 
-```sh
-pnpm create astro@latest -- --template basics
+Astro site for **Acid Systems**, deployed with the Vercel adapter and wired up to Sanity for content.
+
+## Requirements
+
+- Node.js `>= 22.12.0`
+- pnpm (repo is pinned via the root `packageManager`)
+
+## Getting started
+
+From the repo root:
+
+```bash
+pnpm install
+pnpm --filter acid.systems dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Common commands
 
-## 🚀 Project Structure
+Run from the repo root:
 
-Inside of your Astro project, you'll see the following folders and files:
+```bash
+# dev server
+pnpm --filter acid.systems dev
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+# production build + local preview
+pnpm --filter acid.systems build
+pnpm --filter acid.systems preview
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Tech stack
 
-## 🧞 Commands
+- Astro (`astro`)
+- React integration (`@astrojs/react`)
+- Vercel adapter (`@astrojs/vercel`)
+- Sanity (`@sanity/client`, `@sanity/astro`)
 
-All commands are run from the root of the project, from a terminal:
+## Related packages
 
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `pnpm install`         | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `@repo/sanity`: shared Sanity configuration/plugins used by the Studio (and can be used by this site too)
