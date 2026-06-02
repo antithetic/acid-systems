@@ -1,9 +1,43 @@
-# Sanity Clean Content Studio
+# `acid-studio`
 
-Congratulations, you have now installed the Sanity Content Studio, an open-source real-time content editing environment connected to the Sanity backend.
+Sanity Studio for the Acid Systems content backend.
 
-Now you can do the following things:
+## Requirements
 
-- [Read “getting started” in the docs](https://www.sanity.io/docs/introduction/getting-started?utm_source=readme)
-- [Join the Sanity community](https://www.sanity.io/community/join?utm_source=readme)
-- [Extend and build plugins](https://www.sanity.io/docs/content-studio/extending?utm_source=readme)
+- pnpm workspace install from the repo root
+
+## Configure
+
+This Studio is configured via `sanity.cli.ts`:
+
+- `projectId`: `nmhp3u9m`
+- `dataset`: `production`
+
+## Getting started
+
+From the repo root:
+
+```bash
+pnpm install
+pnpm --filter acid-studio dev
+```
+
+## Common commands
+
+Run from the repo root:
+
+```bash
+# local studio dev server
+pnpm --filter acid-studio dev
+
+# build + deploy
+pnpm --filter acid-studio build
+pnpm --filter acid-studio deploy
+
+# (optional) GraphQL API deployment
+pnpm --filter acid-studio deploy-graphql
+```
+
+## Notes
+
+- This app depends on `@repo/sanity` (workspace package) for shared Studio configuration/plugins.

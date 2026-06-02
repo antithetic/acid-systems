@@ -1,1 +1,1 @@
-export {default} from '@repo/sanity'
+export {config as default} from '@repo/sanity'

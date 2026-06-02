@@ -9,7 +9,7 @@
     "format": "prettier --write .",
     "lint": "pnpm dlx oxlint@latest --fix"
   },
-  "packageManager": "pnpm@11.3.0",
+  "packageManager": "pnpm@11.5.0",
   "devDependencies": {
     "prettier": "^3.8.3",
     "turbo": "^2.9.14"

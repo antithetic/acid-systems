@@ -74,26 +74,69 @@ export const colorNote = defineType({
     select: {
       name: 'name',
       tagline: 'tagline',
-      firstColor: 'palette.0.color',
+      palette: 'palette',
     },
-    prepare({name, tagline, firstColor}) {
+    prepare({name, tagline, palette}) {
+      const firstColor = palette?.[0]?.color
       const hex = firstColor?.hex as string | undefined
       const hex2 = (firstColor as {hex2?: string} | undefined)?.hex2
       const css = firstColor?.css as string | undefined
       const isGradient = Boolean(firstColor?.isGradient)
+      const swatches = (palette ?? [])
+        .map((entry: {color?: unknown} | undefined) => {
+          const color = entry?.color as
+            | {hex?: string; css?: string; isGradient?: boolean}
+            | undefined
+
+          // Ignore placeholder/empty entries so columns match what’s visible.
+          if (!color) return null
+          if (color.isGradient && color.css) return color
+          if (color.hex) return color
+          return null
+        })
+        .filter(Boolean) as Array<{
+        hex?: string
+        css?: string
+        isGradient?: boolean
+      }>
 
       const Media = () =>
-        React.createElement('div', {
-          style: {
-            width: '100%',
-            height: '100%',
-            ...(isGradient && css
-              ? {background: css}
-              : {backgroundColor: hex ?? 'transparent'}),
-            border: '1px solid rgba(0,0,0,0.15)',
-            boxSizing: 'border-box',
+        React.createElement(
+          'div',
+          {
+            style: {
+              width: '100%',
+              height: '100%',
+              display: 'grid',
+              gridTemplateColumns: `repeat(${Math.min(
+                5,
+                Math.max(1, swatches.length),
+              )}, 1fr)`,
+              gap: 1,
+              border: '1px solid rgba(0,0,0,0.15)',
+              boxSizing: 'border-box',
+              overflow: 'hidden',
+            },
           },
-        })
+          [
+            ...swatches.map((color, i) => {
+              const cellHex = color?.hex as string | undefined
+              const cellCss = color?.css as string | undefined
+              const cellIsGradient = Boolean(color?.isGradient)
+              return React.createElement('div', {
+                key: i,
+                style: {
+                  width: '100%',
+                  height: '100%',
+                  ...(cellIsGradient && cellCss
+                    ? {background: cellCss}
+                    : {backgroundColor: cellHex ?? 'transparent'}),
+                  boxSizing: 'border-box',
+                },
+              })
+            }),
+          ],
+        )
 
       return {
         title: name ?? 'Untitled palette',
