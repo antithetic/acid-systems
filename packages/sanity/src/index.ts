@@ -16,7 +16,9 @@ import {youtubeInput} from 'sanity-plugin-youtube-input'
 import {webhooksTrigger} from 'sanity-plugin-webhooks-trigger'
 
 import {acidSystemsSchema} from './acid.systems/schema'
+import {acidSystemsStructure} from './acid.systems/structure'
 import {notesSchema} from './notes/schema'
+import {notesStructure} from './notes/structure'
 
 export const sharedConfig = {
   theme,
@@ -45,6 +47,7 @@ export const config = defineConfig([
     ...sharedConfig,
     plugins: [
       structureTool({
+        structure: acidSystemsStructure,
         defaultDocumentNode: (S) =>
           S.document().views([S.view.form(), referencesView(S)]),
       }),
@@ -65,7 +68,9 @@ export const config = defineConfig([
     ...sharedConfig,
 
     plugins: [
-      structureTool({}),
+      structureTool({
+        structure: notesStructure,
+      }),
       ...sharedPlugins.plugins,
       youtubeInput({
         // @ts-ignore
