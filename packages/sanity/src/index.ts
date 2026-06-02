@@ -35,7 +35,7 @@ export const sharedPlugins = {
     tags(),
   ],
 }
-export default defineConfig([
+export const config = defineConfig([
   {
     basePath: '/acid-systems',
     name: 'acid-systems',
