@@ -5,14 +5,6 @@ allowBuilds:
   esbuild: true
   sharp: true
 minimumReleaseAgeExclude:
-  - astro@6.3.8
-  - '@sanity/diff@5.27.0'
-  - '@sanity/mutator@5.27.0'
-  - '@sanity/schema@5.27.0'
-  - '@sanity/types@5.27.0'
-  - '@sanity/util@5.27.0'
-  - '@sanity/vision@5.27.0'
-  - sanity@5.27.0
   - '@sanity/cli-build@0.2.0'
   - '@sanity/cli@6.7.0'
   - '@sanity/diff@5.29.0'
