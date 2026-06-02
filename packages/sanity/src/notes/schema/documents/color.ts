@@ -82,11 +82,25 @@ export const colorNote = defineType({
       const hex2 = (firstColor as {hex2?: string} | undefined)?.hex2
       const css = firstColor?.css as string | undefined
       const isGradient = Boolean(firstColor?.isGradient)
+      const swatches = (palette ?? [])
+        .map((entry: {color?: unknown} | undefined) => {
+          const color = entry?.color as
+            | {hex?: string; css?: string; isGradient?: boolean}
+            | undefined
+
+          // Ignore placeholder/empty entries so columns match what’s visible.
+          if (!color) return null
+          if (color.isGradient && color.css) return color
+          if (color.hex) return color
+          return null
+        })
+        .filter(Boolean) as Array<{
+        hex?: string
+        css?: string
+        isGradient?: boolean
+      }>
 
       const Media = () =>
-        // We only render swatches for actual entries (plus a single blank
-        // placeholder when there is exactly 1 entry, so the preview still
-        // reads as a "palette").
         React.createElement(
           'div',
           {
@@ -96,7 +110,7 @@ export const colorNote = defineType({
               display: 'grid',
               gridTemplateColumns: `repeat(${Math.min(
                 5,
-                Math.max(2, palette?.length ?? 0),
+                Math.max(1, swatches.length),
               )}, 1fr)`,
               gap: 1,
               border: '1px solid rgba(0,0,0,0.15)',
@@ -105,14 +119,10 @@ export const colorNote = defineType({
             },
           },
           [
-            ...(palette ?? []).map((entry: {color?: unknown} | undefined, i: number) => {
-              const color = entry?.color as
-                | {hex?: string; css?: string; isGradient?: boolean}
-                | undefined
+            ...swatches.map((color, i) => {
               const cellHex = color?.hex as string | undefined
               const cellCss = color?.css as string | undefined
               const cellIsGradient = Boolean(color?.isGradient)
-
               return React.createElement('div', {
                 key: i,
                 style: {
@@ -125,19 +135,6 @@ export const colorNote = defineType({
                 },
               })
             }),
-            ...(palette?.length === 1
-              ? [
-                  React.createElement('div', {
-                    key: 'placeholder',
-                    style: {
-                      width: '100%',
-                      height: '100%',
-                      backgroundColor: 'transparent',
-                      boxSizing: 'border-box',
-                    },
-                  }),
-                ]
-              : []),
           ],
         )
 
