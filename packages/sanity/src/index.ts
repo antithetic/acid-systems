@@ -17,6 +17,7 @@ import {webhooksTrigger} from 'sanity-plugin-webhooks-trigger'
 
 import {acidSystemsSchema} from './acid.systems/schema'
 import {notesSchema} from './notes/schema'
+import {notesStructure} from './notes/structure'
 
 export const sharedConfig = {
   theme,
@@ -65,7 +66,9 @@ export const config = defineConfig([
     ...sharedConfig,
 
     plugins: [
-      structureTool({}),
+      structureTool({
+        structure: notesStructure,
+      }),
       ...sharedPlugins.plugins,
       youtubeInput({
         // @ts-ignore
